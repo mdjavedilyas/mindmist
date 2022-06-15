@@ -1,4 +1,4 @@
-
+`use strict`
 function loadTasks() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function(response) {
@@ -9,7 +9,7 @@ function loadTasks() {
         if (i > 5) {
           arr.length = i + 1
         }else {
-          let html = `<div class="card task-cards border-primary m-2" style="width: 15rem;">
+          let html = `<div class="card task-cards border-primary m-2" style="width: 17.45rem;">
             <div class="card-body">
               <div class="vendor">
               <h4>${task.vendor}</h4>
@@ -25,7 +25,6 @@ function loadTasks() {
               </div>
             </div>
           </div>`
-          console.log(html);
           taskBody.innerHTML = taskBody.innerHTML + (html)
         }
       });
@@ -45,7 +44,6 @@ function loadItems() {
   xhttp.onreadystatechange = function(response) {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText)
-      console.log(data);
       let taskBody = document.getElementById("items")
       data.data.forEach((item, i, arr) => {
         if (i > 5) {
@@ -72,7 +70,6 @@ function loadItems() {
               </div>
             </div>
           </div>`
-          console.log(html);
           taskBody.innerHTML = taskBody.innerHTML + (html)
         }
       });
@@ -85,3 +82,19 @@ function loadItems() {
 
 }
 loadItems()
+
+// chart
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Monthly Report',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: 'rgb(3, 140, 252)',
+          tension: 0.1
+        }]
+    }
+});
